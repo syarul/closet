@@ -1,2 +1,2 @@
 # closet
-a type checking in JavaScript without excess boilerplate or superSet language 
+a type checking in JavaScript without excessive boilerplate
