@@ -1,4 +1,8 @@
 # closet
+
+[![npm package](https://img.shields.io/badge/npm-0.0.1-blue.svg)](https://www.npmjs.com/package/@syrl/closet)
+[![Build status](https://ci.appveyor.com/api/projects/status/5hk4mr4d50fd6ntm/branch/master?svg=true)](https://ci.appveyor.com/project/syarul/webpack-tape-run/branch/master)
+
 A compilation types checking in JavaScript
 
 ## Introduction
