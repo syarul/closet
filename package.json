@@ -1,0 +1,51 @@
+{
+  "name": "@syrl/closet",
+  "version": "0.0.1",
+  "description": "A compilation types checking in JavaScript",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "npm run compile",
+    "test": "jest --coverage",
+    "lint": "standard **/*.js --fix",
+    "pretest": "npm run lint",
+    "compile": "babel -d lib/ src/"
+  },
+  "bin": {
+    "closet-compile": "bin/compiler.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syarul/closet.git"
+  },
+  "keywords": [
+    "types",
+    "check",
+    "javascript",
+    "validation"
+  ],
+  "author": "Shahrul Nizam Selamat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/syarul/closet/issues"
+  },
+  "homepage": "https://github.com/syarul/closet#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "commander": "^10.0.0",
+    "jest": "^29.5.0",
+    "standard": "^17.0.0"
+  },
+  "standard": {
+    "globals": [
+      "test",
+      "expect"
+    ]
+  }
+}
