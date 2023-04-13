@@ -3,12 +3,12 @@ A compilation types checking in JavaScript
 
 ## Introduction
 
-This is type checking implementation similar to `Joi` or `prop-types`. The focus of this module is to do check on `compilation` to ensure you caught errors before moving into production, once you have it ready then you can use the compiler to transform them into compilation. Some advantages are;-
+This is type checking implementation similar to `Joi` or `prop-types`. The focus of this module is to do check on `compilation` to ensure you caught errors before moving into production, once you have it ready then you can use the compiler. Some advantages are;-
 
-- use object to define rule/interface or simply plain string
-- you can use classes or extend them and validate them
-- compile it into the clean version of codes, js to js
-- support most types defined in the lodash Lang methods as long it take single argument
+- Use object to define rule/interface or simply plain string
+- You can use classes or extend them and validate them
+- Compile it into the clean version of codes, js to js
+- Support most types defined in the lodash Lang methods as long it take single argument
 
 ## Usage
 
@@ -72,10 +72,10 @@ To compile use the compiler executable
 
 type `closet-compile -h`
 
--h, --help             output usage information
--V, --version          output the version number
--f, --file <name>      file target to compile
--o, --output <name>    file to output into
+    -h, --help             output usage information
+    -V, --version          output the version number
+    -f, --file <name>      file target to compile
+    -o, --output <name>    file to output into
 
 type `closet-compile -f file.closet.js -o output.js` to compile, without output parameter it will log the output to the console
 
