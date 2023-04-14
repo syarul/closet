@@ -12,7 +12,7 @@ This is type checking implementation similar to `Joi` or `prop-types`. The focus
 - Use object to define rule/interface or simply plain string
 - You can use classes or extend them and validate them
 - Compile it into the clean version of codes, js to js
-- Support most types defined in the lodash Lang methods as long it take single argument
+- Support most types defined in the lodash Lang methods as long it takes single argument
 
 ## Usage
 
