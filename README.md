@@ -1,7 +1,7 @@
-# closet
+# closet-type
 
-[![npm package](https://img.shields.io/badge/npm-0.0.1-blue.svg)](https://www.npmjs.com/package/@syrl/closet)
-[![Build status](https://ci.appveyor.com/api/projects/status/5hk4mr4d50fd6ntm/branch/master?svg=true)](https://ci.appveyor.com/project/syarul/webpack-tape-run/branch/master)
+[![npm package](https://img.shields.io/badge/npm-0.0.1-blue.svg)](https://www.npmjs.com/package/closet-type)
+[![Build status](https://ci.appveyor.com/api/projects/status/5hk4mr4d50fd6ntm/branch/master?svg=true)](https://ci.appveyor.com/project/syarul/closet-type/branch/master)
 
 A compilation types checking in JavaScript
 
@@ -17,7 +17,7 @@ This is type checking implementation similar to `Joi` or `prop-types`. The focus
 ## Usage
 
 ```js
-const { Closet } = require('@syr/closet')
+const { Closet } = require('closet-type')
 
 const closet = new Closet()
 
@@ -72,7 +72,7 @@ Check the the test for more case usage
 
 To compile use the compiler executable
 
-`npm install -g @syrl/closet`
+`npm install -g closet-type`
 
 type `closet-compile -h`
 
@@ -85,7 +85,7 @@ type `closet-compile -f file.closet.js -o output.js` to compile, without output 
 
 ```js
 // sample.closet.js
-const Closet = require('../src/closet')
+import { Closet } from 'closet-type'
 
 const closet = new Closet()
 

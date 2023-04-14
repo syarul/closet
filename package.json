@@ -1,5 +1,5 @@
 {
-  "name": "@syrl/closet",
+  "name": "closet-type",
   "version": "0.0.1",
   "description": "A compilation types checking in JavaScript",
   "main": "lib/index.js",

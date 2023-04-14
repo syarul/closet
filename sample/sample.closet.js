@@ -1,4 +1,4 @@
-const Closet = require('../src/closet')
+import { Closet } from 'closet-type'
 
 const closet = new Closet()
 
