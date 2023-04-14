@@ -1,7 +1,8 @@
 # closet-type
 
 [![npm package](https://img.shields.io/badge/npm-0.0.1-blue.svg)](https://www.npmjs.com/package/closet-type)
-[![Build status](https://ci.appveyor.com/api/projects/status/5hk4mr4d50fd6ntm/branch/master?svg=true)](https://ci.appveyor.com/project/syarul/closet-type/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/weij73ekw2rak2j0/branch/main?svg=true)](https://ci.appveyor.com/project/syarul/closet/branch/main)
+[![Coverage Status](https://coveralls.io/repos/github/syarul/closet/badge.svg?branch=main)](https://coveralls.io/github/syarul/closet?branch=main)
 
 A compilation types checking in JavaScript
 
