@@ -1,6 +1,6 @@
 # closet-type
 
-[![npm package](https://img.shields.io/badge/npm-0.0.1-blue.svg)](https://www.npmjs.com/package/closet-type)
+[![npm package](https://img.shields.io/badge/npm-0.0.2-blue.svg)](https://www.npmjs.com/package/closet-type)
 [![Build status](https://ci.appveyor.com/api/projects/status/weij73ekw2rak2j0/branch/main?svg=true)](https://ci.appveyor.com/project/syarul/closet/branch/main)
 [![Coverage Status](https://coveralls.io/repos/github/syarul/closet/badge.svg?branch=main)](https://coveralls.io/github/syarul/closet?branch=main)
 
