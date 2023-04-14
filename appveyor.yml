@@ -18,5 +18,7 @@ test_script:
   - node --version
   - npm --version
   - npm test
+after_test:
+  - cat ./coverage/lcov.info | coveralls
 cache:
   - '%APPDATA%\npm-cache'
