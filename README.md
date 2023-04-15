@@ -1,7 +1,7 @@
 # closet-type
 
 [![NPM Version](https://img.shields.io/npm/v/closet-type.svg)](https://www.npmjs.com/package/closet-type)
-[![closet-type CI](https://github.com/syarul/closet/actions/workflows/main-ci.yml/badge.svg?branch=main)](https://github.com/syarul/closet-type/actions/workflows/main-ci.yml)
+[![closet-type CI](https://github.com/syarul/closet-type/actions/workflows/main-ci.yml/badge.svg)](https://github.com/syarul/closet-type/actions/workflows/main-ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/syarul/closet/badge.svg?branch=main)](https://coveralls.io/github/syarul/closet-type?branch=main)
 <!--[![Build status](https://ci.appveyor.com/api/projects/status/weij73ekw2rak2j0/branch/main?svg=true)](https://ci.appveyor.com/project/syarul/closet-type/branch/main)-->
 
