@@ -8,7 +8,8 @@
     "test": "jest --coverage",
     "lint": "standard **/*.js --fix",
     "pretest": "npm run lint",
-    "compile": "babel -d lib/ src/"
+    "compile": "babel -d lib/ src/",
+    "coverage": "coveralls < coverage/lcov.info"
   },
   "bin": {
     "closet-compile": "bin/compiler.js"

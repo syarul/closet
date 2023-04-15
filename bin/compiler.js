@@ -28,7 +28,11 @@ function ReadLine (file) {
 
   let inRemove = false
 
+  let inExport = false
+
   return new Promise(resolve => {
+    let exportOpeningBracket = 0
+    let exportClosingBracket = 0
     rd.on('line', function (line) {
       if (inRemove) {
         line = line + '// ---- begin remove ----'
@@ -36,15 +40,53 @@ function ReadLine (file) {
           inRemove = false
         }
       }
-      if (line.match(re) && /execType/.test(line)) {
-        const matches = line.match(re)
-        if (matches.length === 3) {
-          line = `${matches[0].slice(1, -1)}${matches[2]}`
-        } else if (matches.length === 2) {
-          line = `${matches[0].slice(1, -1)}${matches[1]}`
-        } else {
-          line = remove
+      if (/export/.test(line)) {
+        inExport = true
+        if (/{/i.test(line)) {
+          exportOpeningBracket++
         }
+        if (/}/i.test(line)) {
+          exportClosingBracket++
+        }
+      }
+      if (!/export/.test(line) && inExport) {
+        if (/{/i.test(line)) {
+          exportOpeningBracket++
+        }
+        if (/}/i.test(line)) {
+          exportClosingBracket++
+        }
+      }
+      if (exportOpeningBracket === exportClosingBracket) {
+        inExport = false
+      }
+      if (line.match(re) && /execType/.test(line)) {
+        // first split the lines base one spacing
+        const lineSplit = line.split(/\s/)
+        line = lineSplit.map(split => {
+          // only check split that has execType
+          if (/execType/.test(split)) {
+            const matches = split.match(re)
+            let closetKey = line.match(/(?<=\s)(\S+)(?=\.execType)/)
+            // try to look for key on starting split
+            if (!closetKey) {
+              closetKey = line.match(/^(\S+)(?=\.execType)/)
+            }
+            // remove closet method
+            split = split.replace(`${closetKey[0]}.execType`, '')
+            // remove the bracket on the first matches
+            split = split.replace(matches[0], matches[0].slice(1, -1))
+            // remove type matches
+            if (matches.length === 3) {
+              split = split.replace(matches[1], '')
+            }
+            // only remove when it was export line
+            if (matches.length === 2 && ((/export/.test(line)) || inExport)) {
+              split = split.replace(matches[1], '')
+            }
+          }
+          return split
+        }).reduce((acc, curr, i) => `${acc}${i === 0 ? '' : ' '}${curr}`, '') // rejoin the string
       } else if (/Closet/.test(line) || /closet/.test(line)) {
         if (/\.addRules\(\{/.test(line)) {
           inRemove = true
@@ -108,6 +150,10 @@ function ReadLine (file) {
           return curr
         })
       lines = lines.filter((f, i) => !linesRemove.includes(i))
+      // remove the first line if it empty
+      if (!lines[0].length) {
+        lines.shift()
+      }
       resolve(lines.join('\n'))
     })
   })

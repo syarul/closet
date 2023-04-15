@@ -2,7 +2,7 @@ import { Closet } from 'closet-type'
 
 const closet = new Closet()
 
-closet.execType(console.log)('number')(7)
+console.log('foo') && closet.execType(console.log)('number')(7)
 
 const foo = {
   bar: 1

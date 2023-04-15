@@ -2,13 +2,14 @@
 
 [![npm package](https://img.shields.io/badge/npm-0.0.2-blue.svg)](https://www.npmjs.com/package/closet-type)
 [![Build status](https://ci.appveyor.com/api/projects/status/weij73ekw2rak2j0/branch/main?svg=true)](https://ci.appveyor.com/project/syarul/closet/branch/main)
+[![closet-type CI](https://github.com/syarul/closet/actions/workflows/main-ci.yml/badge.svg?branch=main)](https://github.com/syarul/closet/actions/workflows/main-ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/syarul/closet/badge.svg?branch=main)](https://coveralls.io/github/syarul/closet?branch=main)
 
 A compilation types checking in JavaScript
 
 ## Introduction
 
-This is type checking implementation similar to `Joi` or `prop-types`. The focus of this module is to do check on `compilation` to ensure you caught errors before moving into production, once you have it ready then you can use the compiler. Some advantages are;-
+This is type checking implementation similar to `Joi` or `prop-types`. The focus of this module is to do type check on `compilation` to ensure you caught errors before moving into production, once you have it ready then you can use the compiler. Some advantages are;-
 
 - Use object to define rule/interface or simply plain string
 - You can use classes or extend them and validate them
@@ -17,22 +18,41 @@ This is type checking implementation similar to `Joi` or `prop-types`. The focus
 
 ## Usage
 
+Normally you need to hard code types checking, polluting your codes with extra lines
+
 ```js
-const { Closet } = require('closet-type')
+const add = (a, b) => {
+  if (typeof a !== 'number' && typeof b !== 'number') { // check type
+    throw new TypeError('Wrong argument types')         // check type
+  }                                                     // check type
+  return a + b
+}
+
+export default add
+```
+
+While in `closet-type` you do the checking in the wrapper without passing to the actual function yet
+```js
+import { Closet } from 'closet-type'
 
 const closet = new Closet()
 
 const add = (a, b) => a + b
 
-closet.execType(add)('number', 'number')(4, 5) // 7
+export default closet.execType(add)('number', 'number')
+```
 
-closet.execType(add)('number', 'number')(4, 'foo') // error
+Once you compile with the compiler, this will change into
+```js
+const add = (a, b) => a + b
+
+export default add
 ```
 
 To use with rule definition
 
 ```js
-const closetRule = new Closet()
+import { Closet } from 'closet-type'
 
 const rule = {
   name: { type: 'string', required: true },
@@ -49,7 +69,9 @@ const rule = {
   }
 }
 
-closetRule.addRules(rule)
+const closet = new Closet()
+
+closet.addRules(rule)
 
 const data = {
   name: 'John',
@@ -64,7 +86,7 @@ const data = {
 
 const fn = (d) => d
 
-closetRule.execType(fn)(data) // data
+closet.execType(fn)(data) // data
 ```
 
 Check the the test for more case usage
