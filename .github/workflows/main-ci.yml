@@ -18,15 +18,15 @@ jobs:
           node-version: 16
           cache: npm
       - run: npm ci
-      - name: Test
+
+      - name: Test & Coverage
         run: npm test
+
       - name: Coverage
         run: npm run coverage
         
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@v1.1.2
-        with:
-          github-token: ${{ github.token }}
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1
 
   publish-gpr:
     needs: build

@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/syarul/closet.git"
+    "url": "https://github.com/syarul/closet-type"
   },
   "keywords": [
     "types",
@@ -27,9 +27,9 @@
   "author": "Shahrul Nizam Selamat",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/syarul/closet/issues"
+    "url": "https://github.com/syarul/closet-type/issues"
   },
-  "homepage": "https://github.com/syarul/closet#readme",
+  "homepage": "https://github.com/syarul/closet-type#readme",
   "dependencies": {
     "lodash": "^4.17.21"
   },
