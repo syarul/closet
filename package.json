@@ -49,5 +49,8 @@
       "test",
       "expect"
     ]
+  },
+  "publishConfig": {
+    "@syarul:registry": "https://npm.pkg.github.com"
   }
 }
