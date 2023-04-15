@@ -22,9 +22,6 @@ jobs:
       - name: Test
         run: npm test
 
-      #- name: Coverage
-      #  run: npm run coverage
-        
       - name: Coveralls
         uses: coverallsapp/github-action@v1
 
@@ -41,6 +38,7 @@ jobs:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
+      #- run: npm version patch
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
