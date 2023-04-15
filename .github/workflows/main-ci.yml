@@ -23,11 +23,10 @@ jobs:
       - name: Coverage
         run: npm run coverage
         
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v1.1.2
         with:
-          path-to-lcov: "./coverage/lcov.info"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ github.token }}
 
   publish-gpr:
     needs: build
