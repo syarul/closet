@@ -110,7 +110,7 @@ function ReadLine (file) {
       } else if (/\.addRules\(/.test(line)) {
         const matches = line.match(re)
         keyCheck.push(`${matches[0].slice(1, -1)}`)
-        inRemove = true
+        // inRemove = true
         line = line + '// ---- begin remove ----'
       }
       lines.push(line)
@@ -163,10 +163,23 @@ function ReadLine (file) {
           return curr
         }, 0)
       lines = lines.filter((f, i) => !linesRemove.includes(i))
-      // remove the first line if it empty
-      if (!lines[0].length) {
-        lines.shift()
+      // trim files line top/bottom
+      const trims = []
+      for (let i = 0; i < lines.length - 1; i++) {
+        if (!lines[i].length) {
+          trims.push(i)
+        } else {
+          break
+        }
       }
+      for (let i = lines.length - 1; i > -1; i--) {
+        if (!lines[i].length) {
+          trims.push(i)
+        } else {
+          break
+        }
+      }
+      lines = lines.filter((f, i) => !trims.includes(i))
       resolve(lines.join('\n'))
     })
   })
