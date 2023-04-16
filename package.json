@@ -1,6 +1,6 @@
 {
   "name": "@syarul/closet-type",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A compilation types checking in JavaScript",
   "main": "lib/index.js",
   "scripts": {

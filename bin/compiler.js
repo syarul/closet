@@ -1,4 +1,5 @@
 const readline = require('readline')
+const { Readable } = require('stream')
 const fs = require('fs')
 
 const { program } = require('commander')
@@ -6,11 +7,13 @@ program.version('0.0.1')
 
 program
   .option('-f, --file <name>', 'file target to compile')
+  .option('-s, --string <name>', 'read source from string in base64')
+  .option('-e, --encoding <name>', 'read source from string require encoding, default to utf-8', 'utf-8')
   .option('-o, --output <name>', 'file to output into')
 
 program.parse(process.argv)
 
-const { file, output } = program.opts()
+const { file, string, encoding, output } = program.opts()
 
 const re = /\((.*?)\)/g
 
@@ -19,9 +22,19 @@ const remove = '// ---- remove ----'
 const keyCheck = []
 
 function ReadLine (file) {
+  let input
+  if (file) {
+    input = fs.createReadStream(file)
+  } else if (string) {
+    const str = Buffer.from(string, 'base64').toString(encoding)
+    input = Readable.from(str, { encoding })
+  } else {
+    input = process.stdin
+  }
+
   let lines = []
   const rd = readline.createInterface({
-    input: fs.createReadStream(file),
+    input,
     output: process.stdout,
     terminal: false
   })
@@ -148,7 +161,7 @@ function ReadLine (file) {
             linesRemove.push(curr)
           }
           return curr
-        })
+        }, 0)
       lines = lines.filter((f, i) => !linesRemove.includes(i))
       // remove the first line if it empty
       if (!lines[0].length) {
@@ -161,6 +174,14 @@ function ReadLine (file) {
 
 if (file) {
   ReadLine(file).then(str => {
+    if (output) {
+      fs.writeFileSync(output, str)
+    } else {
+      console.log(str)
+    }
+  })
+} else {
+  ReadLine().then(str => {
     if (output) {
       fs.writeFileSync(output, str)
     } else {

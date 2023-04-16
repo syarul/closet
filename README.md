@@ -102,9 +102,11 @@ type `closet-compile -h`
     -h, --help             output usage information
     -V, --version          output the version number
     -f, --file <name>      file target to compile
+    -s, --string <name>    read source from string in base64
+    -e, --encoding <name>  read source from string require encoding, default to utf-8
     -o, --output <name>    file to output into
 
-type `closet-compile -f file.closet.js -o output.js` to compile, without output parameter it will log the output to the console
+You can use stdin `cat somefile.js | closet-compiler`, you can also use a base64 string input `closet-compile -s VGhpcyBpcyBhIFVURi04IHN0cmlu...`. For example type `closet-compile -f file.closet.js -o output.js` to compile, without output parameter it will log the output to the stdout/console
 
 ```js
 // sample.closet.js
