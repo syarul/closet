@@ -93,7 +93,11 @@ Check the the test for more case usage
 
 ## Compiling
 
-To compile use the compiler executable
+You can automate compilation with the webpack loader [https://github.com/syarul/webpack-closet-type](https://github.com/syarul/webpack-closet-type)
+
+`npm install webpack-closet-type`
+
+To manually compile use the compiler executable
 
 `npm install -g closet-type`
 
