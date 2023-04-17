@@ -185,20 +185,10 @@ function ReadLine (file) {
   })
 }
 
-if (file) {
-  ReadLine(file).then(str => {
-    if (output) {
-      fs.writeFileSync(output, str)
-    } else {
-      console.log(str)
-    }
-  })
-} else {
-  ReadLine().then(str => {
-    if (output) {
-      fs.writeFileSync(output, str)
-    } else {
-      console.log(str)
-    }
-  })
-}
+ReadLine(file).then(str => {
+  if (output) {
+    fs.writeFileSync(output, str)
+  } else {
+    console.log(str)
+  }
+})
