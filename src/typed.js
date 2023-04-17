@@ -1,11 +1,10 @@
-const _ = require('lodash')
 const ruleSet = require('./ruleSet')
-const { lodashType } = require('./utils')
+const { _, lodashType } = require('./utils')
 
 const typed = (types) => {
   let ind = 0
   let typed = ''
-  return _.curry(function () {
+  return function () {
     const areArgsValid = types.every((type, index) => {
       if (typeof type === 'string') {
         ind = index
@@ -19,14 +18,14 @@ const typed = (types) => {
     if (areArgsValid) {
       // If the types match, call the original function with the arguments
       const args = arguments
-      return _.curry(function (fn) {
+      return function (fn) {
         return fn.apply(this, args)
-      })
+      }
     } else {
       // If the types do not match, throw an error
       throw new TypeError(`Invalid argument [${ind}] type ${typed}`)
     }
-  })
+  }
 }
 
 module.exports = typed

@@ -42,12 +42,48 @@ const add = (a, b) => a + b
 export default closet.execType(add)('number', 'number')
 ```
 
-Once you compile with the compiler, this will change into
+Once you compile with the compiler, this will neatly change into
 ```js
 const add = (a, b) => a + b
 
 export default add
 ```
+
+Supported types are:-
+- arguments // lodash
+- array // lodash
+- arrayBuffer // lodash
+- arrayLike // lodash
+- arrayLikeObject // lodash
+- boolean // lodash
+- buffer // lodash
+- date // lodash
+- element // lodash
+- empty // lodash
+- error // lodash
+- finite // lodash
+- function // lodash
+- integer // lodash
+- length // lodash
+- map // lodash
+- NaN // lodash
+- native // lodash
+- nil // lodash
+- null // lodash
+- number // lodash
+- object // lodash
+- objectLike // lodash
+- plainObject // lodash
+- RegExp // lodash
+- safeInteger // lodash
+- set // lodash
+- string // lodash
+- symbol // lodash
+- typedArray // lodash
+- undefined // lodash
+- weakMap // lodash
+- weakSet // lodash
+- promise // 
 
 To use with rule definition
 

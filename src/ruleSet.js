@@ -1,5 +1,4 @@
-const _ = require('lodash')
-const { lodashType } = require('./utils')
+const { _, lodashType } = require('./utils')
 
 const ruleSet = (rules) => {
   const errors = {}
@@ -7,6 +6,7 @@ const ruleSet = (rules) => {
     let isType
     const [mKey, data] = this
     const cKey = mKey.length ? `${mKey}.${key}` : key
+    // console.log(this, cKey)
     if (key === 'oneOf' && rule.length) {
       const truth = rule.some(r => _[lodashType(r)](data, r))
       if (!truth) {
@@ -22,31 +22,43 @@ const ruleSet = (rules) => {
     } else if (key !== 'instanceOf') {
       isType = lodashType(rule.type)
     }
-    if (rule.required && !_.has(data, key)) {
+    if (rule.required && data[key] === undefined) {
       errors[cKey] = `${cKey} is required`
-    } else if (!rule.oneOf && _.has(data, key) && !_[isType](data[key], rule.type)) {
+    } else if (!rule.oneOf && data[key] !== undefined && !_[isType](data[key], rule.type)) {
       errors[cKey] = `${cKey} must be a ${rule.type}`
-    } else if (_.has(rule, 'min') && data[key] < rule.min) {
+    } else if (rule.min !== undefined && data[key] < rule.min) {
       errors[cKey] = `${cKey} must be at least ${rule.min}`
     } else if (
-      _.has(rule, 'format') &&
-      _.isRegExp(rule.format) &&
+      rule.format !== undefined &&
+      rule.format instanceof RegExp &&
       !rule.format.test(data[key])
     ) {
       errors[cKey] = `${cKey} must match the format ${rule.format}`
-    } else if (key !== 'instanceOf' && _.has(rule, 'length') && typeof data === 'object' && data[key].length !== rule.length) {
+    } else if (
+      rule.format !== undefined &&
+      typeof rule.format === 'function' &&
+      !rule.format(data[key])
+    ) {
+      errors[cKey] = `${cKey} must match the format ${rule.format}`
+    } else if (key !== 'instanceOf' && rule.length !== undefined && typeof data === 'object' && data[key].length !== rule.length) {
       errors[cKey] = `${cKey} must be ${rule.length} characters long`
-    } else if (_.has(rule, 'properties')) {
-      _.forOwn(rule.properties, validator.bind([key, _.get(data, key)]))
+    } else if (rule.properties !== undefined) {
+      const properties = rule.properties
+      for (const propKey in properties) {
+        validator.call([key, data[key]], properties[propKey], propKey)
+      }
     }
   }
-  return _.curry(function (data) {
-    _.forOwn(rules, validator.bind(['', data]))
-    if (!_.isEmpty(errors)) {
-      Object.keys(errors).some(e => { throw new TypeError(errors[e]) })
+  return function (data) {
+    for (const key in rules) {
+      validator.bind(['', data])(rules[key], key)
+    }
+    const errorKeys = Object.keys(errors)
+    if (errorKeys.length > 0) {
+      errorKeys.forEach(e => { throw new TypeError(errors[e]) })
     }
     return data
-  })
+  }
 }
 
 module.exports = ruleSet

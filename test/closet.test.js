@@ -38,8 +38,8 @@ const rule = {
     type: 'object',
     required: true,
     properties: {
-      city: { type: 'string', required: true },
-      state: { type: 'string', required: true },
+      city: { type: 'string', required: true, format: (prop) => ['New York', 'Washington DC'].includes(prop) },
+      state: { type: 'promise', required: true },
       zip: { type: 'string', required: true, length: 5 }
     }
   }
@@ -53,7 +53,7 @@ const data = {
   email: 'john@example.com',
   address: {
     city: 'New York',
-    state: 'NY',
+    state: Promise.resolve('NY'),
     zip: '10001'
   }
 }
@@ -89,6 +89,12 @@ test('execute:rules_failed_format', function () {
 test('execute:rules_failed_length', function () {
   data.email = 'john@example.com'
   data.address.zip = '10'
+  expect(() => { closetRule.execType(fn)(data) }).toThrow()
+})
+
+test('execute:rules_failed_format_function', function () {
+  data.address.zip = '10001'
+  data.address.city = 'Los Angeles'
   expect(() => { closetRule.execType(fn)(data) }).toThrow()
 })
 
