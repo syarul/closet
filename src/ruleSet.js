@@ -6,7 +6,6 @@ const ruleSet = (rules) => {
     let isType
     const [mKey, data] = this
     const cKey = mKey.length ? `${mKey}.${key}` : key
-    // console.log(this, cKey)
     if (key === 'oneOf' && rule.length) {
       const truth = rule.some(r => _[lodashType(r)](data, r))
       if (!truth) {

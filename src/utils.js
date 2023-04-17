@@ -34,50 +34,49 @@ const isWeakMap = require('lodash').isWeakMap
 const isWeakSet = require('lodash').isWeakSet
 
 const _ = {
-  isArguments,
-  isArray,
-  isArrayBuffer,
-  isArrayLike,
-  isArrayLikeObject,
-  isBoolean,
-  isBuffer,
-  isDate,
-  isElement,
-  isEmpty,
-  isError,
-  isFinite,
-  isFunction,
-  isInteger,
-  isLength,
-  isMap,
-  isNaN,
-  isNative,
-  isNil,
-  isNull,
-  isNumber,
-  isObject,
-  isObjectLike,
-  isPlainObject,
-  isRegExp,
-  isSafeInteger,
-  isSet,
-  isString,
-  isSymbol,
-  isTypedArray,
-  isUndefined,
-  isWeakMap,
-  isWeakSet,
-  isPromise: function (value) { // added Promise checker
+  arguments: isArguments,
+  array: isArray,
+  arrayBuffer: isArrayBuffer,
+  arrayLike: isArrayLike,
+  arrayLikeObject: isArrayLikeObject,
+  boolean: isBoolean,
+  buffer: isBuffer,
+  date: isDate,
+  element: isElement,
+  empty: isEmpty,
+  error: isError,
+  finite: isFinite,
+  function: isFunction,
+  integer: isInteger,
+  length: isLength,
+  mp: isMap,
+  NaN: isNaN, // preserve case sensitive
+  native: isNative,
+  nil: isNil,
+  null: isNull,
+  number: isNumber,
+  object: isObject,
+  objectLike: isObjectLike,
+  plainObject: isPlainObject,
+  RegExp: isRegExp, // preserve case sensitive
+  safeInteger: isSafeInteger,
+  set: isSet,
+  string: isString,
+  symbol: isSymbol,
+  typedArray: isTypedArray,
+  undefined: isUndefined,
+  weakMap: isWeakMap,
+  weakSet: isWeakSet,
+  promise: function (value) { // added Promise checker
     return value instanceof Promise
   }
 }
 
 const lodashType = (type) => {
-  const vType = `is${type.charAt(0).toUpperCase()}${type.slice(1)}`
-  if (_[vType] === undefined) {
-    throw new TypeError(`Lodash method ${vType} does not exist`)
+  if (_[type] === undefined) {
+    throw new TypeError(`Method ${type} does not exist`)
   }
-  return `is${type.charAt(0).toUpperCase()}${type.slice(1)}`
+  return type
 }
 
 module.exports = {
