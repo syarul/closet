@@ -5,20 +5,20 @@
 [![Coverage Status](https://coveralls.io/repos/github/syarul/closet-type/badge.svg?branch=main)](https://coveralls.io/github/syarul/closet-type?branch=main)
 <!--[![Build status](https://ci.appveyor.com/api/projects/status/weij73ekw2rak2j0/branch/main?svg=true)](https://ci.appveyor.com/project/syarul/closet-type/branch/main)-->
 
-A compilation types checking in JavaScript
+Ensure type safety in your JavaScript code with compilation-based type checking solution.
 
 ## Introduction
 
-This is type checking implementation similar to `Joi` or `prop-types`. The focus of this module is to do type check on `compilation` to ensure you caught errors before moving into production, once you have it ready then you can use the compiler. Some advantages are;-
+This module provides an implementation of type checking similar to `Joi` or `prop-types`. Its main purpose is to check types during the compilation phase, thereby allowing you to catch errors before moving to production. Once you have prepared your code, you can use the compiler. Some of the advantages of using this module are:
 
-- Use object to define rule/interface or simply plain string
-- You can use classes or extend them and validate them
-- Compile it into the clean version of codes, js to js
-- Support most types defined in the lodash Lang methods as long it takes single argument
+- You can use objects or plain strings to define rules or interfaces
+- You can use classes, or extend them and validate them
+- The module compiles clean versions of your code from JS to JS
+- The module supports most types defined in the Lodash Lang methods, as long as they take a single argument
 
 ## Usage
 
-Normally you need to hard code types checking, polluting your codes with extra lines
+By default, performing type checking often requires hardcoding type validation, which can clutter your code with unnecessary and redundant lines.
 
 ```js
 const add = (a, b) => {
@@ -31,7 +31,8 @@ const add = (a, b) => {
 export default add
 ```
 
-While in `closet-type` you do the checking in the wrapper without passing to the actual function yet
+With `closet-type`, you can perform your checking in the wrapper itself, without having to pass it to the actual function yet.
+
 ```js
 import { Closet } from 'closet-type'
 
@@ -42,7 +43,7 @@ const add = (a, b) => a + b
 export default closet.execType(add)('number', 'number')
 ```
 
-Once you compile with the compiler, this will neatly change into
+Experience the seamless transformation of your code after compiling with the compiler.
 ```js
 const add = (a, b) => a + b
 
@@ -125,11 +126,11 @@ const fn = (d) => d
 closet.execType(fn)(data) // data
 ```
 
-Check the the test for more case usage
+For more usage cases, check the [test](https://github.com/syarul/closet-type/tree/main/test) folder.
 
 ## Compiling
 
-You can automate compilation with the webpack loader [https://github.com/syarul/webpack-closet-type](https://github.com/syarul/webpack-closet-type)
+Streamline your compilation process and save time with the webpack loader [https://github.com/syarul/webpack-closet-type](https://github.com/syarul/webpack-closet-type)
 
 `npm install webpack-closet-type`
 
@@ -146,7 +147,7 @@ type `closet-compile -h`
     -e, --encoding <name>  read source from string require encoding, default to utf-8
     -o, --output <name>    file to output into
 
-You can use stdin `cat somefile.js | closet-compiler`, you can also use a base64 string input `closet-compile -s VGhpcyBpcyBhIFVURi04IHN0cmlu...`. For example type `closet-compile -f file.closet.js -o output.js` to compile, without output parameter it will log the output to the stdout/console
+You can use stdin `cat somefile.js | closet-compiler`, you can also use a base64 string input `closet-compile -s VGhpcyBpcyBhIFVURi04IHN0cmlu...`. For example type `closet-compile -f file.closet.js -o output.js` to compile, without output parameter it will log the output to stdout/console
 
 ```js
 // sample.closet.js
