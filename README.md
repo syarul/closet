@@ -49,6 +49,7 @@ const add = (a, b) => a + b
 
 export default add
 ```
+## Types 
 
 Supported types are:-
 - arguments // lodash
@@ -84,9 +85,29 @@ Supported types are:-
 - undefined // lodash
 - weakMap // lodash
 - weakSet // lodash
-- promise // 
+- promise // check if it a promise
 
-To use with rule definition
+To add new types
+
+```js
+const closetWithNewType = new Closet()
+  .addTypes({
+    uuid: function (uuid) { // new uuid type is now available
+      return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(uuid) 
+    }
+  })
+  .addRules({ _id: { type: 'uuid' } }) 
+```
+or 
+```js
+import { addNewTypes, typed } from 'closet-type'
+
+addNewTypes({ mongoId: (id) => /^[a-f\d]{24}$/i.test(id) })
+
+typed('mongoId')('5f45f935887dbf37e853e7d1')(console.log) // 5f45f935887dbf37e853e7d1
+```
+
+## Usage with rule definition
 
 ```js
 import { Closet } from 'closet-type'

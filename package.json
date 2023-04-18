@@ -1,6 +1,6 @@
 {
   "name": "@syarul/closet-type",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "Ensure type safety in your JavaScript code with compilation-based type checking solution.",
   "main": "lib/index.js",
   "scripts": {

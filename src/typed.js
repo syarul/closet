@@ -9,7 +9,7 @@ const typed = (types) => {
       if (typeof type === 'string') {
         ind = index
         typed = type
-        return _[lodashType(type)](arguments[index], type)
+        return _()[lodashType(type)](arguments[index], type)
       } else if (typeof type === 'object') {
         return ruleSet(type)(arguments[index])
       }

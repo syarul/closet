@@ -7,12 +7,12 @@ const ruleSet = (rules) => {
     const [mKey, data] = this
     const cKey = mKey.length ? `${mKey}.${key}` : key
     if (key === 'oneOf' && rule.length) {
-      const truth = rule.some(r => _[lodashType(r)](data, r))
+      const truth = rule.some(r => _()[lodashType(r)](data, r))
       if (!truth) {
         errors[cKey] = `must be one of ${rule.join(', ')}`
       }
     } else if (rule.oneOf && rule.oneOf.length) {
-      const truth = rule.oneOf.some(r => _[lodashType(r)](data[key], r))
+      const truth = rule.oneOf.some(r => _()[lodashType(r)](data[key], r))
       if (!truth) {
         errors[cKey] = `${cKey} must be one of ${rule.join(', ')}`
       }
@@ -23,7 +23,7 @@ const ruleSet = (rules) => {
     }
     if (rule.required && data[key] === undefined) {
       errors[cKey] = `${cKey} is required`
-    } else if (!rule.oneOf && data[key] !== undefined && !_[isType](data[key], rule.type)) {
+    } else if (!rule.oneOf && data[key] !== undefined && !_()[isType](data[key], rule.type)) {
       errors[cKey] = `${cKey} must be a ${rule.type}`
     } else if (rule.min !== undefined && data[key] < rule.min) {
       errors[cKey] = `${cKey} must be at least ${rule.min}`

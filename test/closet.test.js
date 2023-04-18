@@ -1,4 +1,5 @@
 const Closet = require('../src/closet')
+const { addNewTypes } = require('../src/utils')
 
 const closet = new Closet()
 
@@ -16,7 +17,7 @@ test('execute:failed_type_does_not_exist', function () {
   expect(() => { closet.execType(add)('number', 'foo')(1, 1) }).toThrow()
 })
 
-test('execute:s_type_is_not_string', function () {
+test('execute:failed_type_is_not_string', function () {
   expect(() => { closet.execType(add)('number', 1)(1, 1) }).toThrow()
 })
 
@@ -138,4 +139,26 @@ test('execute:test_instance_of', function () {
 
 test('execute:test_instance_of_error', function () {
   expect(() => { closet.execType(e => e.fullName())({ instanceOf: {} })(new Person('a', 'b')) }).toThrow()
+})
+
+const closetWithNewType = new Closet()
+  .addTypes({
+    uuid: (uuid) => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(uuid)
+  })
+  .addRules({ _id: { type: 'uuid' } })
+
+const dataID = {
+  _id: '802fcc9d-0b23-4adb-9c97-57e237bb6851'
+}
+
+test('execute:test_added_new_type', function () {
+  expect(closetWithNewType.execType(data => data)(dataID)).toBe(dataID)
+})
+
+test('execute:test_added_new_type_failed_not_an_object', function () {
+  expect(() => { addNewTypes('foo') }).toThrow()
+})
+
+test('execute:test_added_new_type_failed_property_not_function', function () {
+  expect(() => { addNewTypes({ foo: 1 }) }).toThrow()
 })

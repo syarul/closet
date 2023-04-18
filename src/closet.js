@@ -1,4 +1,5 @@
 const typed = require('./typed')
+const { addNewTypes } = require('./utils')
 
 class Closet {
   constructor () {
@@ -9,6 +10,12 @@ class Closet {
   addRules (rule) {
     this.rules = rule
     this.useRules = true
+    return this
+  }
+
+  addTypes (types) {
+    addNewTypes(types)
+    return this
   }
 
   execType (fn) {
