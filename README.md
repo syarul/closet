@@ -16,6 +16,8 @@ This module provides an implementation of type checking similar to `Joi` or `pro
 - The module compiles clean versions of your code from JS to JS
 - The module supports most types defined in the Lodash Lang methods, as long as they take a single argument
 
+Here's the first example to get you started. [Try it here](https://codepen.io/syarul/pen/JjmRWWK)—no build step required!
+
 ## Usage
 
 By default, performing type checking often requires hardcoding type validation, which can clutter your code with unnecessary and redundant lines.
